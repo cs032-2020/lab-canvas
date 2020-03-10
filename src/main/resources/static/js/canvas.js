@@ -46,7 +46,7 @@ $(document).ready(() => {
   $('#submit').click(submitSelection);
 
   // listens for user to change text in the textarea field for autocorrect
-  $('#autocorrect').on('input', function() {
+  $('#autocorrect').on('input', function () {
     // clear the screen
     $('#suggestions').html("");
 
@@ -60,7 +60,7 @@ $(document).ready(() => {
       $('#suggestions').html("");
     } else {
       // build the javascript object that contains data for POST request
-      const postParams = {word: input};
+      const postParams = { word: input };
 
       // POST request to "/generate" endpoing with word information
       $.post("/generate", postParams, responseJSON => {
@@ -72,7 +72,7 @@ $(document).ready(() => {
         const suggestionsList = $('<ul>').appendTo('#suggestions');
         const suggestionsJSON = responseObject.suggestions
         console.log(suggestionsJSON)
-        $(suggestionsJSON).each(function(index, item) {
+        $(suggestionsJSON).each(function (index, item) {
           suggestionsList.append(
             $(document.createElement('li')).text(item)
           );
@@ -187,14 +187,14 @@ const paintOnClick = event => {
 */
 const submitSelection = () => {
   // build javascript object that contains the data for the POST request.
-  const postParameters = {flags: selection.join(" ")};
+  const postParameters = { flags: selection.join(" ") };
 
   const $message = $("#message");
 
   // post request to "/setflags" endpoint with toggle settings selected
   $.post("/setflags", postParameters, responseJSON => {
-      // Parse the JSON response into a JavaScript object.
-      const responseObject = JSON.parse(responseJSON);
-      $message.html(responseObject.props);
+    // Parse the JSON response into a JavaScript object.
+    const responseObject = JSON.parse(responseJSON);
+    $message.html(responseObject.props);
   });
 }
